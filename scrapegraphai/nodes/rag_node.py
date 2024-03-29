@@ -79,8 +79,8 @@ class RAGNode(BaseNode):
 
         print("--- (updated chunks metadata) ---")
 
-        openai_key = self.llm_model.openai_api_key
-        embeddings = HuggingFaceEmbeddings(model_name = "mxbai-embed-large-v1")
+        
+        embeddings = HuggingFaceEmbeddings(model_name = "mixedbread-ai/mxbai-embed-large-v1")
         retriever = FAISS.from_documents(chunked_docs,
                                          embeddings).as_retriever()
         # could be any embedding of your choice
