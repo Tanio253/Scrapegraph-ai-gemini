@@ -10,7 +10,7 @@ from langchain_community.document_transformers import EmbeddingsRedundantFilter
 from langchain_community.vectorstores import FAISS
 from langchain_openai import OpenAIEmbeddings
 from .base_node import BaseNode
-
+from langchain.embeddings import HuggingFaceEmbeddings
 
 class RAGNode(BaseNode):
     """
@@ -83,7 +83,7 @@ class RAGNode(BaseNode):
         retriever = FAISS.from_documents(chunked_docs,
                                          OpenAIEmbeddings(api_key=openai_key)).as_retriever()
         # could be any embedding of your choice
-        embeddings = OpenAIEmbeddings(api_key=openai_key)
+        embeddings = HuggingFaceEmbeddings(model_name = "mxbai-embed-large-v1")
         redundant_filter = EmbeddingsRedundantFilter(embeddings=embeddings)
         # similarity_threshold could be set, now k=20
         relevant_filter = EmbeddingsFilter(embeddings=embeddings)
